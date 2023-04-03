@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card mt-2 paint-card">
+						<div class="card-body">
+							<h1 class="text-center">Register Here</h1>
+							
+							<!-- Alert Message -->
+							<div th:if="${msg}" class="text-center">
+							<h4 class="text-success" th:text="${msg}">Success</h4>
+							</div>
+							<!-- Alert Message -->
+
+							<div class="card-body">
+								<form th:action="@{/saveuser}" method="post" th:object="${user}">
+
+
+									<div class="form-group mt-1">
+										<label>Enter Name</label><input type="text" id="name"
+											name="name" class="form-control" required>
+									</div>
+
+									<div class="form-group mt-3">
+										<label>Enter Email</label><input type="email" id="email"
+											name="email" class="form-control" required>
+									</div>
+
+									<div class="form-group mt-3">
+										<label>Enter Password</label><input type="password"
+											id="password" name="password" class="form-control" required>
+									</div>
+
+									<div class="form-group mt-3">
+										<textarea rows="3" cols="" id="about" name="about"
+											class="form-control" placeholder="Enter About"></textarea>
+									</div>
+
+									<div class="text-center mt-3">
+										<button type="submit" class="btn bg-primary text-white">Submit</button>
+										<button type="reset" class="btn btn-primary text-white">Reset</button>
+
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

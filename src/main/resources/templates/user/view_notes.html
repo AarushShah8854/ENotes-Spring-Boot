@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<h3 class=text-center>Notes</h3>
+
+			<!-- Alert Message -->
+			<div th:if="${msg}" class="text-center">
+				<h4 class="text-success" th:text="${msg}">Success</h4>
+			</div>
+
+			<div class="col-md-12 mt-3" th:each="n:${Notes}">
+				<div class="card paint-card">
+					<div class="card-body">
+						<div class="text-center">
+							<img alt="" th:src="@{/img/paper.png}"
+								style="width: 50px; height: 50px;">
+						</div>
+
+						<h5>[[${n.title}]]</h5>
+						<p>
+							[[${n.content}]] <br> <br> <span
+								class="font-weight-bold"> Upload Date:</span>
+							[[${n.updatedDate}]]
+						</p>
+
+						<div class="text-center">
+							<a th:href="@{'/user/editnotes/' + ${n.id}}"
+								class="btn btn-primary btn-sm">Edit</a> 
+								<a href="#" th:href="@{'/user/deletenotes/' + ${n.id}}"
+								class="btn btn-danger btn-sm ml-2">Delete</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row p-4">
+				<div class="col-md-4">Total Elements : [[${totalElements}]]</div>
+				<div class="col-md-6">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li th:classappend="${pageNo==0}?'disabled':''" class="page-item">
+								<a class="page-link" href="#"
+								th:href="@{'/user/viewnotes/' + ${pageNo-1}}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+							</li>
+
+							<li th:each="i:${#numbers.sequence(1,totalPage)}"
+								th:classappend="${pageNo+1==i}?'active':''" class="page-item"><a
+								th:href="@{'/user/viewnotes/' + ${i-1} }" class="page-link"
+								href="#">[[${i}]]</a></li>
+
+							<li class="page-item"
+								th:classappend="${pageNo==totalPage-1}?'disabled':''"><a
+								class="page-link" href="#"
+								th:href="@{'/user/viewnotes/' + ${pageNo+1}}" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+							</a></li>
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

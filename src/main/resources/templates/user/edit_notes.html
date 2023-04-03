@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container-fluid p-3">
+			<div class="col-md-10 offset-md-1">
+				<div class="card paint-card">
+					<h3 class="text-center">Edit Notes</h3>
+					
+					<div class="card-body">
+						<form th:action="@{/user/updatenotes}" method="post">
+
+							<div class="form-group">
+								<label>Enter Title</label><input type="text" name="title"
+									th:value="${notes.title}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Enter Description</label>
+								<textarea rows="12" cols="" name="content"
+									th:value="${notes.content}" 
+									class="form-control">[[${notes.content}]]</textarea>
+							</div>
+							<input type="hidden" th:value="${notes.id}" name="id">
+
+							<div class="text-center">
+								<button class="btn btn-primary" type="submit">Update</button>
+							</div>
+						</form>
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
